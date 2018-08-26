@@ -1,0 +1,33 @@
+server:
+  port: 8090
+spring:
+  datasource:
+    driverClass: com.mysql.jdbc.Driver
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/springboottest?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+    user: root
+    password: 123456
+    minPoolSize: 2 #连接池中保留的最小连接数。默认为15
+    maxPoolSize: 100 #连接池中保留的最大连接数。默认为15；
+    maxIdleTime: 1800000 #最大空闲时间，超过空闲时间的连接将被丢弃。为0或负数则永不丢弃。默认为0；
+    acquireIncrement: 3 #当连接池中的连接用完时，C3P0一次性创建新连接的数目；
+    #JDBC的标准参数，用以控制数据源内加载的PreparedStatement数量。
+    #但由于预缓存的Statement属 于单个Connection而不是整个连接池。
+    #所以设置这个参数需要考虑到多方面的因素，
+    #如果maxStatements与 maxStatementsPerConnection均为0，则缓存被关闭。默认为0；
+    maxStatements: 100
+    initialPoolSize: 10 #初始化时创建的连接数，应在minPoolSize与maxPoolSize之间取值。默认为3；
+    idleConnectionTestPeriod: 60 #隔多少秒检查所有连接池中的空闲连接，默认为0表示不检查；
+    acquireRetryAttempts: 30 #从数据库获取新连接失败后重复尝试获取的次数，默认为30；
+    acquireRetryDelay: 1000 #两次连接中间隔时间，单位毫秒，默认为1000；
+    #获取连接失败将会引起所有等待获取连接的线程抛出异常。但是数据源仍有效保留，
+    #并在下次调用getConnection()的时候继续尝试获取连接。
+    #如果设为true，那么在尝试获取连接失败后该数据源将申明已断开并永久关闭。默认为 false；
+    breakAfterAcquireFailure: false
+    #因性能消耗大请只在需要的时候使用它。
+    #如果设为true那么在每个connection提交的时候都 将校验其有效性。
+    #建议使用idleConnectionTestPeriod或automaticTestTable
+    testConnectionOnCheckout: false
+    autoCommitOnClose: true #连接关闭时默认将所有未提交的操作回滚。默认为false；
+    maxStatementsPerConnection: 100 #连接池内单个连接所拥有的最大缓存Statement数。默认为0；
+mybatis:
+  mapper-locations: com/liuguoquan/ssm/mapper/*Mapper.xml
